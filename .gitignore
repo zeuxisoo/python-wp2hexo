@@ -1,0 +1,6 @@
+.DS_Store
+.*~
+*.pyc
+_posts/*
+octopress/*
+export.xml
