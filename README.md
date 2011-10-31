@@ -8,7 +8,7 @@
 	- run.sh
 	- export.xml
 
-# Login wordpress backend, export the XML files place into root driectory and named
+# Login wordpress, export the XML files place into root driectory and named
 
 	export.xml
 
