@@ -16,6 +16,8 @@ class Parser(object):
 	def parse(self):
 		feed = feedparser.parse("export.xml")
 
+		feed.entries.reverse()
+
 		for entry in feed.entries:
 			if entry.wp_status == "publish" and entry.wp_post_type == "post":
 				wordpress_id = entry.wp_post_id
@@ -41,6 +43,33 @@ class Parser(object):
 				content = content.replace('< %', '<%')
 				content = content.replace('< ?php', '<?php')
 
+				to_english_tags = {
+					u'伺服器'		: 'Server',
+					u'忽然一感'	: 'Life',
+					u'未分類'		: 'Other',
+					u'案子'		: 'Case',
+					u'程式作品'	: 'Project',
+					u'程式修改'	: 'Code Modifiy',
+					u'程式片段'	: 'Code Snippet',
+					u'程式筆記'	: 'Notes',
+					u'網摘'		: 'Bookmark',
+					u'網絡見聞'	: 'Web Link',
+					u'網路代碼'	: 'Web Coding',
+					u'網路文章'	: 'Web Article',
+					u'編輯器'		: 'Editor',
+					u'資料收集'	: 'Research',
+					u'軟體應用'	: 'Software'
+				}
+
+				tags = []
+				for tag in entry.tags:
+					if tag.scheme == "category":
+						key = tag.term
+						if key in to_english_tags:
+							tags.append("- " +  to_english_tags[key])
+						else:
+							tags.append("- " +  key.encode('utf8'))
+
 				print("Converting: %s" % name)
 
 				f = open("_posts/%s" % name, 'w+')
@@ -51,6 +80,8 @@ class Parser(object):
 				f.write("wordpress_id: %s\n" % wordpress_id)
 				f.write("permalink: /blog/archives/%s\n" % wordpress_id)
 				f.write("comments: true\n")
+				f.write("categories:\n")
+				f.write("%s\n" % "\n".join(tags))
 				f.write("---\n")
 				f.write(content.encode("utf8"))
 				f.close()
