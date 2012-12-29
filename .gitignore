@@ -3,4 +3,5 @@
 *.pyc
 _posts/*
 octopress/*
+hexo/*
 export.xml
