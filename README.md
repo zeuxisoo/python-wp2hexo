@@ -4,6 +4,7 @@
 	- /_posts
 	- /lib
 	- /octopress
+	- /hexo
 	- convert.py
 	- run.sh
 	- export.xml
