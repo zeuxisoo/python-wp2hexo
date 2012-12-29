@@ -17,10 +17,10 @@ done
 
 if [ $stop = 0 ]; then
 	echo -e "\033[;35;5mRemoving..."
-	rm -Rf octopress/source/_posts/*
+	rm -Rf $convertor/source/_posts/*
 	
 	echo -e "\033[;35;5mCopying..."
-	cp -Rf _posts/* octopress/source/_posts/
+	cp -Rf _posts/* $convertor/source/_posts/
 	
 	echo -e "\033[;32;5mDone"
 fi
