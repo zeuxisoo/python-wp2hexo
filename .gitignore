@@ -1,7 +1,4 @@
 .DS_Store
 .*~
 *.pyc
-_posts/*
-octopress/*
-hexo/*
-export.xml
+
