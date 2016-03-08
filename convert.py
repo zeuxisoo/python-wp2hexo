@@ -83,7 +83,7 @@ class Convert(object):
                 else:
                     temp_tags.append("- " +  key)
 
-        return ["\n".join(temp_tags), "\n".join(temp_categories)]
+        return ["\n".join(sorted(temp_tags)), "\n".join(sorted(temp_categories))]
 
     def format_content(self, content):
         content = re.sub(r'^<pre[^>]*>$', '{% codeblock %}' + "\n", content)
